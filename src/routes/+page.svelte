@@ -2,4 +2,6 @@
 	import AlertList from '$lib/alert-list.svelte';
 </script>
 
-<AlertList />
+<main>
+	<AlertList />
+</main>
