@@ -7,6 +7,10 @@
     }
 
     const { alerts }: Props = $props()
+
+    function notifyClosed(type: string) {
+        console.log(`Alert of type ${type} closed`);
+    }
 </script>
 
 {#snippet alertMessage(text: string)}
@@ -14,5 +18,5 @@
 {/snippet}
 
 {#each alerts as alert (alert.type) } 
-    <Alert {alert} {alertMessage} />
+    <Alert {alert} {alertMessage} {notifyClosed} />
 {/each}
