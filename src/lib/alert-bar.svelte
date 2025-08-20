@@ -5,7 +5,10 @@
             styles: { text: string, value: string }[]
             directionLabel: string
             directions: { text: string, value: string }[]
-        }
+        };
+        hasCloseButton: boolean;
+        style: string;
+        direction: string;
     }
 
     const { configs }: Props = $props();
