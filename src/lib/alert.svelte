@@ -1,9 +1,9 @@
 <script lang="ts">
-    import InfoIcon from '$lib/info-icon.svelte'
-    import ErrorIcon from '$lib/error-icon.svelte'
-    import SuccessIcon from '$lib/success-icon.svelte'
-    import WarningIcon from '$lib/warning-icon.svelte'
-    import CloseIcon from '$lib/close-icon.svelte'
+    import InfoIcon from '$lib/icons/info-icon.svelte'
+    import ErrorIcon from '$lib/icons/error-icon.svelte'
+    import SuccessIcon from '$lib/icons/success-icon.svelte'
+    import WarningIcon from '$lib/icons/warning-icon.svelte'
+    import CloseIcon from '$lib/icons/close-icon.svelte'
     import type { Snippet } from 'svelte';
 	import type { AlertMessage } from './alert.type';
 
