@@ -16,11 +16,11 @@ type Props = {
     direction: string;
 }
 
-const { alert, 
+const { 
+    alert, 
     alertMessage, 
     notifyClosed, 
-    hasCloseButton = 
-    false, 
+    hasCloseButton, 
     direction, 
     style 
 }: Props = $props();
