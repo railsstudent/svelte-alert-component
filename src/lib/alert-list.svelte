@@ -24,9 +24,14 @@
         ]
     });
 
+    let hasCloseButton = $state(true);
+    let style = $state('color')
+    let direction = $state('horizontal')
+
     function notifyClosed(type: string) {
         console.log(`Alert of type ${type} closed`);
     }
+
 </script>
 
 {#snippet alertMessage(text: string)}
@@ -35,8 +40,12 @@
 
 <h2>Alert Components (Svelte ver.)</h2>
 
-<AlertBar {configs}  />
+<AlertBar {configs} 
+    bind:hasCloseButton={hasCloseButton} 
+    bind:style={style}
+    bind:direction={direction}  
+/>
 
 {#each alerts as alert (alert.type) } 
-    <Alert {alert} {alertMessage} {notifyClosed} />
+    <Alert {alert} {alertMessage} {notifyClosed} {hasCloseButton} {style} {direction} />
 {/each}
