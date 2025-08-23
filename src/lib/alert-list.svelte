@@ -25,11 +25,16 @@
     });
 
     let hasCloseButton = $state(true);
-    let style = $state('color')
-    let direction = $state('horizontal')
+    let style = $state('color');
+    let direction = $state('horizontal');
+    let closedNotifications = $state<string[]>([]);
+    let filteredNotification = $derived.by(() => 
+        alerts.filter(alert => !closedNotifications.includes(alert.type))
+    );
 
     function notifyClosed(type: string) {
         console.log(`Alert of type ${type} closed`);
+        closedNotifications.push(type);
     }
 
 </script>
@@ -43,9 +48,10 @@
 <AlertBar {configs} 
     bind:hasCloseButton={hasCloseButton} 
     bind:style={style}
-    bind:direction={direction}  
+    bind:direction={direction}
+    bind:closedNotifications={closedNotifications}
 />
 
-{#each alerts as alert (alert.type) } 
+{#each filteredNotification as alert (alert.type) } 
     <Alert {alert} {alertMessage} {notifyClosed} {hasCloseButton} {style} {direction} />
 {/each}
