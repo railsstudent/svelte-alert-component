@@ -39,6 +39,10 @@
     function clearAllNotifications() {
         closedNotifications = []
     }
+
+    function hasClosedNotifications() {
+        return closedNotifications.length > 0
+    }
 </script>
 
 <div>
@@ -71,7 +75,7 @@
                 <OpenIcon />{ capitalize(type) }
             </button>    
         {/each}
-        {#if closedNotifications.length > 0}
+        {#if hasClosedNotifications()}
             <button
                 class="btn btn-primary" 
                 onclick={clearAllNotifications}>
