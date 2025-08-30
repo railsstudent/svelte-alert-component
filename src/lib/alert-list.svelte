@@ -28,7 +28,7 @@
     let style = $state('color');
     let direction = $state('horizontal');
     let closedNotifications = $state<string[]>([]);
-    let filteredNotification = $derived.by(() => 
+    let filteredNotifications = $derived.by(() => 
         alerts.filter(alert => !closedNotifications.includes(alert.type))
     );
 
@@ -58,6 +58,6 @@
     bind:closedNotifications={closedNotifications}
 />
 
-{#each filteredNotification as alert (alert.type) } 
+{#each filteredNotifications as alert (alert.type) } 
     <Alert {alert} {alertMessage} {notifyClosed} {alertConfig} />
 {/each}
