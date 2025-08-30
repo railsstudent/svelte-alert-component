@@ -35,6 +35,10 @@
     function removeNotification(type: string) {
      closedNotifications = closedNotifications.filter((t) => t !== type)
     }
+
+    function clearAllNotifications() {
+        closedNotifications = []
+    }
 </script>
 
 <div>
@@ -70,7 +74,7 @@
         {#if closedNotifications.length > 0}
             <button
                 class="btn btn-primary" 
-                onclick={() => closedNotifications = []}>
+                onclick={clearAllNotifications}>
                 Open all alerts
             </button>
         {/if}
