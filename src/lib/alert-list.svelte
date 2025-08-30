@@ -32,6 +32,12 @@
         alerts.filter(alert => !closedNotifications.includes(alert.type))
     );
 
+    const alertConfig = $derived({
+        hasCloseButton,
+        style,
+        direction,
+    });
+
     function notifyClosed(type: string) {
         console.log(`Alert of type ${type} closed`);
         closedNotifications.push(type);
@@ -53,5 +59,5 @@
 />
 
 {#each filteredNotification as alert (alert.type) } 
-    <Alert {alert} {alertMessage} {notifyClosed} {hasCloseButton} {style} {direction} />
+    <Alert {alert} {alertMessage} {notifyClosed} {alertConfig} />
 {/each}

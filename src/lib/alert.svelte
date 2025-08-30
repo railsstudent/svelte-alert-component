@@ -11,18 +11,18 @@ type Props = {
     alert: AlertMessage;
     alertMessage: Snippet<[string]>;
     notifyClosed?: (type: string) => void;
-    hasCloseButton: boolean;
-    style: string;
-    direction: string;
+    alertConfig: {
+        hasCloseButton: boolean;
+        style: string;
+        direction: string;
+    }
 }
 
 const { 
     alert, 
     alertMessage, 
     notifyClosed, 
-    hasCloseButton, 
-    direction, 
-    style 
+    alertConfig,
 }: Props = $props();
 
 const alertColor = $derived.by(() => ({
@@ -35,14 +35,14 @@ const alertColor = $derived.by(() => ({
 const alertDirection = $derived.by(() => ({
     horizontal: 'alert-horizontal',
     vertical: 'alert-vertical',
-}[direction]));
+}[alertConfig.direction]));
 
 const alertStyle = $derived.by(() => ({
     color: '',
     soft: 'alert-soft',
     outline: 'alert-outline',
     dash: 'alert-dash',
-}[style]));
+}[alertConfig.style]));
 
 const alertClasses = $derived(`alert ${alertColor} ${alertDirection} ${alertStyle} mb-[0.75rem]`);
 
@@ -66,7 +66,7 @@ function closeAlert() {
     <div role="alert" class={alertClasses}>
         <Icon ></Icon>
         {@render alertMessage(alert.message) }
-        {#if hasCloseButton} 
+        {#if alertConfig.hasCloseButton} 
             <div>
                 <button class="btn btn-sm btn-primary" title="Close button" onclick={closeAlert}>
                     <CloseIcon />
