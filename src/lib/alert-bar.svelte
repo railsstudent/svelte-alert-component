@@ -2,6 +2,12 @@
 	import { capitalize } from './capitalize';
     import OpenIcon from './icons/open-icon.svelte';
     import AlertDropdown from './alert-dropdown.svelte';
+    import { 
+        getClosedNotification, 
+        removeNotification, 
+        clearAllNotifications, 
+        isNotEmpty 
+    } from './stores/notification.svelte';
 
     type Props = {
         configs: { 
@@ -13,16 +19,16 @@
         hasCloseButton: boolean;
         style: string;
         direction: string;
-        closedNotifications: string[];
     }
 
     let { 
         hasCloseButton = $bindable(), 
         style = $bindable(), 
         direction = $bindable(), 
-        closedNotifications = $bindable(),
         configs 
     }: Props = $props();
+
+    const closedNotifications = getClosedNotification();
 
     function getBtnClass(type: string) {
         return {
@@ -31,18 +37,6 @@
             error: 'btn-error',
             success: 'btn-success'
         }[type]
-    }
-    
-    function removeNotification(type: string) {
-     closedNotifications = closedNotifications.filter((t) => t !== type)
-    }
-
-    function clearAllNotifications() {
-        closedNotifications = []
-    }
-
-    function hasClosedNotifications() {
-        return closedNotifications.length > 0
     }
 </script>
 
@@ -54,7 +48,7 @@
         <AlertDropdown label={configs.directionLabel} items={configs.directions} bind:selectedValue={direction} />
     </p>
     <p class="mb-[0.75rem]">
-        {#each closedNotifications as type (type)}
+        {#each closedNotifications() as type (type)}
             <button
                 class={getBtnClass(type) + ' mr-[0.5rem] btn'}
                 onclick={() => removeNotification(type)}
@@ -62,7 +56,7 @@
                 <OpenIcon />{ capitalize(type) }
             </button>    
         {/each}
-        {#if hasClosedNotifications()}
+        {#if isNotEmpty()}
             <button
                 class="btn btn-primary" 
                 onclick={clearAllNotifications}>

@@ -8,7 +8,7 @@
     let { label, items, selectedValue = $bindable() }: Props = $props();
 </script>
 
-<span>{ label }&nbsp;&nbsp;</span> { selectedValue }
+<span>{ label }&nbsp;&nbsp;</span>
 <select class="select select-info mr-[0.5rem]" bind:value={selectedValue}>
     {#each items as item (item.value) }
         <option value={item.value}>

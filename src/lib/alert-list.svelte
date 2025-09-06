@@ -1,7 +1,8 @@
 <script lang="ts">
 	import AlertBar from './alert-bar.svelte';
-    import Alert from './alert.svelte';
+	import Alert from './alert.svelte';
 	import type { AlertMessage } from './alert.type';
+	import { addNotification, getClosedNotification } from './stores/notification.svelte';
 
     type Props = {
         alerts: AlertMessage[];
@@ -27,9 +28,9 @@
     let hasCloseButton = $state(true);
     let style = $state('color');
     let direction = $state('horizontal');
-    let closedNotifications = $state<string[]>([]);
+    const closedNotifications  = getClosedNotification();
     let filteredNotifications = $derived.by(() => 
-        alerts.filter(alert => !closedNotifications.includes(alert.type))
+        alerts.filter(alert => !closedNotifications().includes(alert.type))
     );
 
     const alertConfig = $derived({
@@ -37,12 +38,6 @@
         style,
         direction,
     });
-
-    function notifyClosed(type: string) {
-        console.log(`Alert of type ${type} closed`);
-        closedNotifications.push(type);
-    }
-
 </script>
 
 {#snippet alertMessage(text: string)}
@@ -55,9 +50,8 @@
     bind:hasCloseButton={hasCloseButton} 
     bind:style={style}
     bind:direction={direction}
-    bind:closedNotifications={closedNotifications}
 />
 
 {#each filteredNotifications as alert (alert.type) } 
-    <Alert {alert} {alertMessage} {notifyClosed} {alertConfig} />
+    <Alert {alert} {alertMessage} notifyClosed={() => addNotification(alert.type)} {alertConfig} />
 {/each}
