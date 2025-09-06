@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { capitalize } from './capitalize';
     import OpenIcon from './icons/open-icon.svelte';
+    import AlertDropdown from './alert-dropdown.svelte';
 
     type Props = {
         configs: { 
@@ -49,22 +50,8 @@
     <p class="mb-[0.75rem]">
         <span>Has close button?</span>
         <input type="checkbox" class="mr-[0.5rem]" bind:checked={hasCloseButton} />
-        <span>{ configs.styleLabel }&nbsp;&nbsp;</span> { style }
-        <select class="select select-info mr-[0.5rem]" bind:value={style}>
-            {#each configs.styles as s (s.value) }
-                <option value={s.value}>
-                    { s.text }
-                </option>
-            {/each}
-        </select>
-        <span>{ configs.directionLabel }&nbsp;&nbsp;</span>
-        <select class="select select-info mr-[0.5rem]" bind:value={direction}> 
-            {#each configs.directions as d (d.value)}
-                <option value={d.value}>
-                    { d.text }
-                </option>
-            {/each}
-        </select>
+        <AlertDropdown label={configs.styleLabel} items={configs.styles} bind:selectedValue={style} />
+        <AlertDropdown label={configs.directionLabel} items={configs.directions} bind:selectedValue={direction} />
     </p>
     <p class="mb-[0.75rem]">
         {#each closedNotifications as type (type)}
