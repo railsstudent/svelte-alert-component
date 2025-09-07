@@ -63,5 +63,5 @@
                 Open all alerts
             </button>
         {/if}
-      </p>
+    </p>
 </div>
