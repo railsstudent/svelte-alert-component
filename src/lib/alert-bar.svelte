@@ -5,7 +5,7 @@
     import { 
         getClosedNotification, 
         removeNotification, 
-        clearAllNotifications, 
+        removeAllNotifications, 
         isNotEmpty 
     } from './stores/notification.svelte';
 
@@ -59,7 +59,7 @@
         {#if isNotEmpty()}
             <button
                 class="btn btn-primary" 
-                onclick={clearAllNotifications}>
+                onclick={removeAllNotifications}>
                 Open all alerts
             </button>
         {/if}

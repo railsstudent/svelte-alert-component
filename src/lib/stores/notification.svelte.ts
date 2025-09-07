@@ -12,7 +12,7 @@ export function removeNotification(type: string) {
     state.closedNotifications = state.closedNotifications.filter((t) => t !== type);
 }
 
-export function clearAllNotifications() {
+export function removeAllNotifications() {
     state.closedNotifications = [];
 }
 
